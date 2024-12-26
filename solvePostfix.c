@@ -1,38 +1,37 @@
-#include <stdio.h>
+#include <Stdio.h>
 #include <math.h>
 #include <ctype.h>
+#include <String.h>
 
-double compute(double op1, double op2, char op) {
-    switch (op) {
-        case '+': return op1 + op2;
-        case '-': return op1 - op2;
-        case '*': return op1 * op2;
-        case '/': return op1 / op2;
-        case '^': return pow(op1, op2);
-        default: return 0;
+int compute(char symbol, int op1, int op2) {
+    switch(symbol) {
+        case '+': return op1+op2;
+        case '-': return op1-op2;
+        case '/': return op1/op2;
+        case '*': return op1*op2;
+        case '%': return op1%op2;
+        case '^': return pow(op1,op2);
     }
 }
 
-void evaluate_postfix(char *postfix) {
-    double stack[50];
-    int top = -1;
-    for (int i = 0; postfix[i]; i++) {
-        char ch = postfix[i];
-        if (isdigit(ch)) {
-            stack[++top] = ch - '0';
-        } else {
-            double op2 = stack[top--];
-            double op1 = stack[top--];
-            stack[++top] = compute(op1, op2, ch);
+void main() {
+    char expression[20];
+    int op1, op2, i, top = -1, result, final;
+    char symbol;
+    int stack[20];
+    printf("Enter postfix expression: \n");
+    scanf("%s", expression);
+    for(i=0; i<strlen(expression); i++) {
+        symbol = expression[i];
+        if(isdigit(symbol))
+            stack[++top] = symbol - '0';
+        else {
+            op2 = stack[top--];
+            op1 = stack[top--];
+            result= compute(symbol, op1, op2);
+            stack[++top] = result;            
         }
     }
-    printf("Result: %.2f\n", stack[top]);
-}
-
-int main() {
-    char postfix[50];
-    printf("Enter postfix expression: ");
-    scanf("%s", postfix);
-    evaluate_postfix(postfix);
-    return 0;
+    final = stack[top--];
+    printf("Value of expression (%s) : %d\n",expression,final);
 }
