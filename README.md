@@ -1,6 +1,6 @@
 # **DSA Lab Programs**
 
-This repository contains the implementations of various Data Structures and Applications (DSA) programs as per the lab manual. Each program demonstrates key DSA concepts in C. 
+This repository contains the implementations of various Data Structures and Applications (BCS305) programs as per the lab manual. Each program demonstrates key DSA concepts in C. 
 
 **Note**: This code is not the same code as the manual and I coded this by myself just referring the manual and made my own changes.
 
